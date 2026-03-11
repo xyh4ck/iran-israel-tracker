@@ -8,6 +8,7 @@ import requests
 import json
 from datetime import datetime
 from pathlib import Path
+import os
 
 # 数据源配置
 SOURCES = {
@@ -34,27 +35,27 @@ def fetch_latest_news():
             'freshness': 'day'
         }
         
-        # 注意：需要设置 BRAVE_SEARCH_API_KEY 环境变量
-        api_key = Path('/root/.openclaw/workspace/iran-israel-tracker/.api_key').exists()
+        # 从环境变量获取 API key
+        api_key = os.environ.get('BRAVE_SEARCH_API_KEY')
         
         if api_key:
-            with open('/root/.openclaw/workspace/iran-israel-tracker/.api_key', 'r') as f:
-                api_key = f.read().strip()
-                headers['X-Subscription-Token'] = api_key
-                
-                response = requests.get(
-                    SOURCES['brave_search'],
-                    headers=headers,
-                    params=params,
-                    timeout=10
-                )
-                
-                if response.status_code == 200:
-                    data = response.json()
-                    print(f"✓ 成功获取 {len(data.get('web', {}).get('results', []))} 条新闻")
-                    return data.get('web', {}).get('results', [])
-                else:
-                    print(f"✗ API 请求失败: {response.status_code}")
+            headers['X-Subscription-Token'] = api_key
+            
+            response = requests.get(
+                SOURCES['brave_search'],
+                headers=headers,
+                params=params,
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                print(f"✓ 成功获取 {len(data.get('web', {}).get('results', []))} 条新闻")
+                return data.get('web', {}).get('results', [])
+            else:
+                print(f"✗ API 请求失败: {response.status_code}")
+        else:
+            print("⚠ 未设置 BRAVE_SEARCH_API_KEY 环境变量，跳过新闻抓取")
     except Exception as e:
         print(f"✗ 抓取失败: {str(e)}")
     
@@ -62,10 +63,11 @@ def fetch_latest_news():
 
 def update_html(news_data):
     """更新 HTML 文件"""
-    html_path = Path('/root/.openclaw/workspace/iran-israel-tracker/index.html')
+    # 使用相对路径或当前工作目录
+    html_path = Path(__file__).parent / 'index.html'
     
     if not html_path.exists():
-        print("✗ index.html 不存在")
+        print(f"✗ index.html 不存在: {html_path}")
         return False
     
     # 读取现有 HTML
