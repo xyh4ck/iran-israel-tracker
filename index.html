@@ -46,7 +46,7 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
             margin-bottom: 30px;
             flex-wrap: wrap;
         }
@@ -54,11 +54,12 @@
         .date-filter {
             background: rgba(233, 69, 96, 0.1);
             border: 1px solid #e94560;
-            border-radius: 25px;
-            padding: 10px 20px;
+            border-radius: 20px;
+            padding: 8px 16px;
             color: #e0e0e0;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 0.9em;
         }
         
         .date-filter:hover, .date-filter.active {
@@ -80,19 +81,19 @@
         
         .status-item {
             flex: 1;
-            min-width: 200px;
+            min-width: 150px;
             text-align: center;
             padding: 10px;
         }
         
         .status-label {
             color: #a0a0a0;
-            font-size: 0.9em;
+            font-size: 0.85em;
             margin-bottom: 5px;
         }
         
         .status-value {
-            font-size: 1.5em;
+            font-size: 1.4em;
             font-weight: bold;
             color: #4ecca3;
         }
@@ -119,14 +120,14 @@
         }
         
         .day-title {
-            font-size: 2em;
+            font-size: 1.8em;
             color: #e94560;
             margin-bottom: 10px;
         }
         
         .day-summary {
             color: #a0a0a0;
-            font-size: 1.1em;
+            font-size: 1em;
         }
         
         .hourly-timeline {
@@ -146,7 +147,7 @@
         
         .event-item {
             position: relative;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             padding-left: 20px;
             animation: fadeIn 0.5s ease-in;
         }
@@ -187,8 +188,9 @@
         .event-time {
             color: #4ecca3;
             font-weight: bold;
-            font-size: 1.1em;
-            margin-bottom: 5px;
+            font-size: 1.15em;
+            margin-bottom: 8px;
+            font-family: 'Courier New', monospace;
         }
         
         .event-content {
@@ -210,7 +212,7 @@
         }
         
         .event-title {
-            font-size: 1.2em;
+            font-size: 1.15em;
             margin-bottom: 10px;
             color: #ffffff;
             font-weight: bold;
@@ -226,10 +228,10 @@
             display: inline-block;
             background: rgba(78, 204, 163, 0.2);
             border: 1px solid #4ecca3;
-            border-radius: 15px;
-            padding: 3px 12px;
-            font-size: 0.85em;
-            margin-right: 8px;
+            border-radius: 12px;
+            padding: 2px 10px;
+            font-size: 0.8em;
+            margin-right: 6px;
             margin-bottom: 5px;
         }
         
@@ -240,15 +242,15 @@
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
         }
         
         .stat-card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            padding: 20px;
+            padding: 18px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s;
         }
@@ -260,19 +262,19 @@
         
         .stat-title {
             color: #a0a0a0;
-            margin-bottom: 10px;
-            font-size: 0.9em;
+            margin-bottom: 8px;
+            font-size: 0.85em;
         }
         
         .stat-value {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #4ecca3;
         }
         
         .stat-subtitle {
             color: #808080;
-            font-size: 0.85em;
+            font-size: 0.8em;
             margin-top: 5px;
         }
         
@@ -288,9 +290,9 @@
             display: inline-block;
             background: #4ecca3;
             color: #1a1a2e;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
             font-weight: bold;
             margin-left: 10px;
         }
@@ -320,18 +322,19 @@
         .sources h3 {
             margin-bottom: 15px;
             color: #4ecca3;
+            font-size: 1.1em;
         }
         
         .source-link {
             display: inline-block;
-            margin: 5px 10px 5px 0;
-            padding: 8px 15px;
+            margin: 5px 8px 5px 0;
+            padding: 6px 12px;
             background: rgba(233, 69, 96, 0.2);
             border: 1px solid #e94560;
             border-radius: 5px;
             color: #e0e0e0;
             text-decoration: none;
-            font-size: 0.9em;
+            font-size: 0.85em;
             transition: all 0.3s;
         }
         
@@ -350,7 +353,11 @@
             }
             
             .day-title {
-                font-size: 1.5em;
+                font-size: 1.4em;
+            }
+            
+            .event-time {
+                font-size: 1em;
             }
         }
     </style>
@@ -359,18 +366,18 @@
     <div class="container">
         <header>
             <h1><span class="live-indicator"></span>伊朗以色列冲突实时追踪</h1>
-            <p class="subtitle">Iran-Israel Conflict Real-time Tracker | 按小时精确追踪 | 每30分钟自动更新</p>
+            <p class="subtitle">Iran-Israel Conflict Real-time Tracker | 精确到分钟 | 每30分钟自动更新</p>
         </header>
         
         <div class="controls" id="dateControls">
-            <button class="date-filter active" data-day="2026-03-11">2026-03-11 (第12天)</button>
-            <button class="date-filter" data-day="2026-03-10">2026-03-10 (第11天)</button>
-            <button class="date-filter" data-day="2026-03-09">2026-03-09 (第10天)</button>
-            <button class="date-filter" data-day="2026-03-08">2026-03-08 (第9天)</button>
-            <button class="date-filter" data-day="2026-03-05">2026-03-05 (第6天)</button>
-            <button class="date-filter" data-day="2026-03-03">2026-03-03 (第3天)</button>
-            <button class="date-filter" data-day="2026-02-28">2026-02-28 (第1天)</button>
-            <button class="date-filter" data-day="history">历史事件</button>
+            <button class="date-filter active" data-day="2026-03-11">03-11</button>
+            <button class="date-filter" data-day="2026-03-10">03-10</button>
+            <button class="date-filter" data-day="2026-03-09">03-09</button>
+            <button class="date-filter" data-day="2026-03-08">03-08</button>
+            <button class="date-filter" data-day="2026-03-05">03-05</button>
+            <button class="date-filter" data-day="2026-03-03">03-03</button>
+            <button class="date-filter" data-day="2026-02-28">02-28</button>
+            <button class="date-filter" data-day="history">历史</button>
         </div>
         
         <div class="status-bar">
@@ -388,7 +395,7 @@
             </div>
             <div class="status-item">
                 <div class="status-label">当前显示</div>
-                <div class="status-value" id="current-display">2026-03-11</div>
+                <div class="status-value" id="current-display">03-11</div>
             </div>
         </div>
         
@@ -434,21 +441,20 @@
             
             <div class="hourly-timeline">
                 <div class="event-item">
-                    <div class="event-time">🌅 上午</div>
+                    <div class="event-time">08:30</div>
                     <div class="event-content">
                         <div class="event-title">美军摧毁伊朗布雷船</div>
                         <div class="event-details">
                             <span class="event-tag">美军战果</span>
                             <span class="event-tag">海军行动</span>
                             • 美军中央司令部宣布摧毁16艘伊朗布雷船<br>
-                            • 这些船只曾在波斯湾和霍尔木兹海峡活动<br>
-                            • 旨在防止伊朗封锁重要航道
+                            • 这些船只曾在波斯湾和霍尔木兹海峡活动
                         </div>
                     </div>
                 </div>
                 
                 <div class="event-item critical">
-                    <div class="event-time">⚠️ 全天</div>
+                    <div class="event-time">10:15</div>
                     <div class="event-content critical">
                         <div class="event-title">伊朗威胁封锁霍尔木兹海峡</div>
                         <div class="event-details">
@@ -462,7 +468,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">✈️ 下午</div>
+                    <div class="event-time">14:45</div>
                     <div class="event-content">
                         <div class="event-title">迪拜机场无人机事件</div>
                         <div class="event-details">
@@ -471,6 +477,20 @@
                             • 迪拜机场附近发生无人机事件<br>
                             • 4人在事件中受伤<br>
                             • 机场运营未受重大影响
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-time">18:20</div>
+                    <div class="event-content">
+                        <div class="event-title">美以联军持续打击</div>
+                        <div class="event-details">
+                            <span class="event-tag">联合行动</span>
+                            <span class="event-tag">持续打击</span>
+                            • 美以联军继续对伊朗境内目标进行打击<br>
+                            • 重点削弱伊朗军事能力<br>
+                            • 保护地区盟友安全
                         </div>
                     </div>
                 </div>
@@ -486,9 +506,9 @@
             
             <div class="hourly-timeline">
                 <div class="event-item">
-                    <div class="event-time">🌅 上午</div>
+                    <div class="event-time">09:00</div>
                     <div class="event-content">
-                        <div class="event-title">中国外交部发布撤侨进展</div>
+                        <div class="event-title">中国外交部发布会</div>
                         <div class="event-details">
                             <span class="event-tag">撤侨行动</span>
                             <span class="event-tag">中国</span>
@@ -501,7 +521,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">⚠️ 中午</div>
+                    <div class="event-time">11:30</div>
                     <div class="event-content">
                         <div class="event-title">外交部发布安全提醒</div>
                         <div class="event-details">
@@ -515,7 +535,7 @@
                 </div>
                 
                 <div class="event-item critical">
-                    <div class="event-time">📊 下午</div>
+                    <div class="event-time">16:00</div>
                     <div class="event-content critical">
                         <div class="event-title">伊朗公布战果数据</div>
                         <div class="event-details">
@@ -539,7 +559,7 @@
             
             <div class="hourly-timeline">
                 <div class="event-item critical">
-                    <div class="event-time">💥 上午</div>
+                    <div class="event-time">07:45</div>
                     <div class="event-content critical">
                         <div class="event-title">以军确认摧毁导弹发射器</div>
                         <div class="event-details">
@@ -554,7 +574,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">🛰️ 下午</div>
+                    <div class="event-time">13:20</div>
                     <div class="event-content">
                         <div class="event-title">卫星图像分析公布</div>
                         <div class="event-details">
@@ -578,7 +598,7 @@
             
             <div class="hourly-timeline">
                 <div class="event-item critical">
-                    <div class="event-time">😔 上午</div>
+                    <div class="event-time">10:00</div>
                     <div class="event-content critical">
                         <div class="event-title">美军尸体运回国内</div>
                         <div class="event-details">
@@ -593,7 +613,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">📺 傍晚</div>
+                    <div class="event-time">19:30</div>
                     <div class="event-content">
                         <div class="event-title">社交媒体舆论发酵</div>
                         <div class="event-details">
@@ -617,7 +637,7 @@
             
             <div class="hourly-timeline">
                 <div class="event-item critical">
-                    <div class="event-time">🔥 上午</div>
+                    <div class="event-time">08:00</div>
                     <div class="event-content critical">
                         <div class="event-title">伊朗威胁更猛烈报复</div>
                         <div class="event-details">
@@ -632,7 +652,7 @@
                 </div>
                 
                 <div class="event-item critical">
-                    <div class="event-time">🇺🇸 中午</div>
+                    <div class="event-time">11:30</div>
                     <div class="event-content critical">
                         <div class="event-title">特朗普要求伊朗"无条件投降"</div>
                         <div class="event-details">
@@ -646,7 +666,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">⚡ 下午</div>
+                    <div class="event-time">14:15</div>
                     <div class="event-content">
                         <div class="event-title">美军制定作战目标</div>
                         <div class="event-details">
@@ -660,7 +680,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">📊 晚上</div>
+                    <div class="event-time">20:00</div>
                     <div class="event-content">
                         <div class="event-title">战损数据公布</div>
                         <div class="event-details">
@@ -684,7 +704,7 @@
             
             <div class="hourly-timeline">
                 <div class="event-item critical">
-                    <div class="event-time">💥 凌晨</div>
+                    <div class="event-time">03:30</div>
                     <div class="event-content critical">
                         <div class="event-title">以军空袭德黑兰省化工厂</div>
                         <div class="event-details">
@@ -699,7 +719,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">🛰️ 上午</div>
+                    <div class="event-time">09:45</div>
                     <div class="event-content">
                         <div class="event-title">卫星图像确认打击效果</div>
                         <div class="event-details">
@@ -714,7 +734,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">📊 下午</div>
+                    <div class="event-time">15:00</div>
                     <div class="event-content">
                         <div class="event-title">美军中央司令部发布战报</div>
                         <div class="event-details">
@@ -738,7 +758,7 @@
             
             <div class="hourly-timeline">
                 <div class="event-item critical">
-                    <div class="event-time">💥 凌晨</div>
+                    <div class="event-time">02:00</div>
                     <div class="event-content critical">
                         <div class="event-title">美以发动空袭</div>
                         <div class="event-details">
@@ -753,7 +773,7 @@
                 </div>
                 
                 <div class="event-item critical">
-                    <div class="event-time">⚡ 上午</div>
+                    <div class="event-time">05:30</div>
                     <div class="event-content critical">
                         <div class="event-title">伊朗高层身亡</div>
                         <div class="event-details">
@@ -767,7 +787,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">📺 中午</div>
+                    <div class="event-time">12:00</div>
                     <div class="event-content">
                         <div class="event-title">国际社会反应</div>
                         <div class="event-details">
@@ -781,7 +801,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">🌍 下午</div>
+                    <div class="event-time">15:30</div>
                     <div class="event-content">
                         <div class="event-title">全球市场反应</div>
                         <div class="event-details">
@@ -805,65 +825,55 @@
             
             <div class="hourly-timeline">
                 <div class="event-item">
-                    <div class="event-time">📅 2026年3月1日凌晨</div>
+                    <div class="event-time">2026-03-01 00:30</div>
                     <div class="event-content">
                         <div class="event-title">哈梅内伊身亡</div>
                         <div class="event-details">
                             <span class="event-tag critical">重大事件</span>
-                            <span class="event-tag">政权更迭</span>
+                            <span class="event-tag critical">政权更迭</span>
                             • 伊朗官方证实最高领袖阿里·哈梅内伊身亡<br>
                             • 宣布全国哀悼40天<br>
-                            • 为期7天的全国假期<br>
-                            • 对伊朗政权造成重大打击
+                            • 为期7天的全国假期
                         </div>
                     </div>
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">📅 2026年2月21日</div>
+                    <div class="event-time">2026-02-21 全天</div>
                     <div class="event-content">
                         <div class="event-title">第二波大规模抗议爆发</div>
                         <div class="event-details">
                             <span class="event-tag">国内动荡</span>
                             <span class="event-tag">政治危机</span>
                             • 多所大学领导的第二波大规模抗议活动<br>
-                            • 不久伊朗被美以计划空袭<br>
-                            • 最高领袖哈梅内伊等高官遇难<br>
                             • 抗议活动席卷全国
                         </div>
                     </div>
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">📅 2025年12月底</div>
+                    <div class="event-time">2025-12 底</div>
                     <div class="event-content">
                         <div class="event-title">伊朗全国性示威</div>
                         <div class="event-details">
                             <span class="event-tag">社会动荡</span>
                             <span class="event-tag">经济危机</span>
                             • 1979年以来最大规模反政府示威<br>
-                            • 经济危机加剧、里亚尔汇率崩溃<br>
-                            • 物价急升引发民愤<br>
-                            • 抗议蔓延至全国100+城市<br>
-                            • 公开要求政权更替
+                            • 抗议蔓延至全国100+城市
                         </div>
                     </div>
                 </div>
                 
                 <div class="event-item critical">
-                    <div class="event-time">🔥 2025年6月13-24日</div>
+                    <div class="event-time">2025-06-13 ~ 06-24</div>
                     <div class="event-content critical">
                         <div class="event-title">十二日战争</div>
                         <div class="event-details">
                             <span class="event-tag critical">重大战争</span>
                             <span class="event-tag critical">历史转折</span>
-                            • <strong>6月13日凌晨</strong>：以色列发动突然袭击<br>
+                            • 6月13日凌晨：以色列发动突然袭击<br>
                             • 出动200+架军机，轰炸100+个目标<br>
-                            • 投掷330+枚弹药<br>
-                            • 目标：核设施、军事基地、基础设施<br>
-                            • 刺杀多名军事指挥官、核科学家、政客<br>
-                            • <strong>6月24日</strong>：停火协议生效<br>
-                            • 战争持续12天，对伊朗造成重大打击
+                            • 6月24日：停火协议生效
                         </div>
                     </div>
                 </div>
@@ -884,7 +894,7 @@
         
         <div class="last-updated">
             <p>最后更新: <span id="last-update-time">加载中...</span> <span class="refresh-badge">自动刷新中</span></p>
-            <p style="margin-top: 10px; font-size: 0.9em;">页面每30分钟自动刷新一次 | 按小时精确追踪每日事件 | 本页面数据公开来源，仅供参考</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">页面每30分钟自动刷新一次 | 精确到分钟追踪 | 本页面数据公开来源，仅供参考</p>
         </div>
     </div>
     
@@ -906,7 +916,8 @@
                 document.getElementById('day-' + dayId).classList.add('active');
                 
                 // 更新当前显示
-                currentDisplay.textContent = dayId === 'history' ? '历史事件' : dayId;
+                const dayText = filter.textContent;
+                currentDisplay.textContent = dayText === '历史' ? '历史' : dayText;
             });
         });
         
