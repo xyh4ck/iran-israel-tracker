@@ -250,9 +250,31 @@
         .timeline-source {
             color: #808080;
             font-size: 0.8em;
-            margin-top: 10px;
+            margin-top: 12px;
             padding-top: 10px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .source-link {
+            color: #4ecca3;
+            text-decoration: none;
+            border-bottom: 1px dashed #4ecca3;
+            transition: all 0.3s;
+        }
+        
+        .source-link:hover {
+            color: #e94560;
+            border-bottom-color: #e94560;
+        }
+        
+        .source-links {
+            margin-top: 8px;
+        }
+        
+        .source-link-item {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 5px;
         }
         
         .event-tag {
@@ -322,6 +344,12 @@
             .date-title {
                 font-size: 1.4em;
             }
+            
+            .source-link-item {
+                display: block;
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
         }
     </style>
 </head>
@@ -389,7 +417,12 @@
                             • 目标：空军基地和东部地区<br>
                             • 伊朗向海湾邻国 renewed fire
                         </div>
-                        <div class="timeline-source">来源：The Hindu、ABC News</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://www.thehindu.com/news/international/israel-iran-war-west-asia-conflict-march-11-2026-live-updates/article70729328.ece" class="source-link" target="_blank">The Hindu</a></span>
+                                <span class="source-link-item">📰 <a href="https://abcnews.com/International/live-updates/iran-live-updates/?id=130893022" class="source-link" target="_blank">ABC News</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -405,7 +438,12 @@
                             • 4人受伤<br>
                             • 机场运营未受重大影响
                         </div>
-                        <div class="timeline-source">来源：ABC News、The Hindu</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://abcnews.com/International/live-updates/iran-live-updates/?id=130893022" class="source-link" target="_blank">ABC News</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.thehindu.com/news/international/israel-iran-war-west-asia-conflict-march-11-2026-live-updates/article70729328.ece" class="source-link" target="_blank">The Hindu</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -420,7 +458,12 @@
                             • 以军空袭行动继续<br>
                             • （注：此空袭从3月10日夜开始）
                         </div>
-                        <div class="timeline-source">来源：CNN、The Guardian</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://www.cnn.com/2026/03/11/middleeast/us-israel-iran-middle-east-war-what-we-know-intl-hnk" class="source-link" target="_blank">CNN</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.theguardian.com/world/live/2026/mar/10/iran-war-live-updates" class="source-link" target="_blank">The Guardian</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -446,7 +489,12 @@
                             • 地点：霍尔木兹海峡附近<br>
                             • 旨在防止伊朗封锁重要航道
                         </div>
-                        <div class="timeline-source">来源：The Hindu</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://www.thehindu.com/news/international/israel-iran-war-west-asia-conflict-march-10-2026-live-updates/article70724870.ece" class="source-link" target="_blank">The Hindu</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.aboluowang.com/2026/0311/2358290.html" class="source-link" target="_blank">博览即时</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -462,7 +510,12 @@
                             • 已接返1万余名中国公民<br>
                             • 自阿联酋、阿曼、沙特安全有序返回
                         </div>
-                        <div class="timeline-source">来源：中国外交部官网</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://www.fmprc.gov.cn/fyrbt_673021/202603/t20260310_11872097.shtml" class="source-link" target="_blank">中国外交部</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.news.cn/world/20260310/ad7f072ee02e4e76bf16672896164908/c.html" class="source-link" target="_blank">新华网</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -477,7 +530,12 @@
                             • 以军在德黑兰发动新一轮空袭<br>
                             • 行动持续到3月11日凌晨
                         </div>
-                        <div class="timeline-source">来源：CNN、The Guardian</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://www.cnn.com/2026/03/11/middleeast/us-israel-iran-middle-east-war-what-we-know-intl-hnk" class="source-link" target="_blank">CNN</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.theguardian.com/world/live/2026/mar/10/iran-war-live-updates" class="source-link" target="_blank">The Guardian</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -503,7 +561,11 @@
                             • 这些发射器曾被用于攻击以色列<br>
                             • 商业卫星图像显示打击效果
                         </div>
-                        <div class="timeline-source">来源：ISW战争研究所</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://understandingwar.org/research/middle-east/iran-update-evening-special-report-march-9-2026/" class="source-link" target="_blank">ISW战争研究所</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -530,7 +592,13 @@
                             <br>
                             <strong>特朗普</strong>：公开要求伊朗"无条件投降"
                         </div>
-                        <div class="timeline-source">来源：新华网、CNN、BBC</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://www.news.cn/world/20260305/ad588d0676274d5b8bc5993be71635b9/c.html" class="source-link" target="_blank">新华网</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.bbc.com/zhongwen" class="source-link" target="_blank">BBC中文</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.cnn.com" class="source-link" target="_blank">CNN</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -557,7 +625,12 @@
                             • 卫星图像显示至少8栋建筑被毁<br>
                             • 打击严重影响伊朗导弹生产能力
                         </div>
-                        <div class="timeline-source">来源：ISW战争研究所</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://understandingwar.org/research/middle-east/iran-update-evening-special-report-march-4-2026/" class="source-link" target="_blank">ISW战争研究所</a></span>
+                                <span class="source-link-item">🛰️ <a href="https://www.bbc.com/zhongwen/articles/clyggp7jgjvo/simp" class="source-link" target="_blank">BBC中文</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -583,7 +656,13 @@
                             • 打击核设施和军事目标<br>
                             • 标志着2026年美以空袭伊朗战争的开始
                         </div>
-                        <div class="timeline-source">来源：Wikipedia、CNN、BBC</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://en.wikipedia.org/wiki/2026_Iran_conflict" class="source-link" target="_blank">Wikipedia</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.cnn.com" class="source" target="_blank">CNN</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.bbc.com" class="source" target="_blank">BBC</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -610,7 +689,12 @@
                             • 投掷330+枚弹药<br>
                             <strong>6月24日</strong>：停火协议生效
                         </div>
-                        <div class="timeline-source">来源：Wikipedia、BBC</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://en.wikipedia.org/wiki/Twelve-Day_War" class="source-link" target="_blank">Wikipedia</a></span>
+                                <span class="source-link-item">📰 <a href="https://www.bbc.com/zhongwen" class="source-link" target="_blank">BBC中文</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -625,7 +709,11 @@
                             • 1979年以来最大规模反政府示威<br>
                             • 抗议蔓延至全国100+城市
                         </div>
-                        <div class="timeline-source">来源：Wikipedia</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://zh.wikipedia.org/wiki/2025%E2%80%942026%E5%B9%B4%E4%BC%8A%E6%8A%97%E8%AE%AE%E6%B4%BB%E5%8A%A8" class="source-link" target="_blank">维基百科</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -639,7 +727,11 @@
                             <span class="event-tag">政治危机</span>
                             • 多所大学领导的第二波大规模抗议活动
                         </div>
-                        <div class="timeline-source">来源：Wikipedia</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://zh.wikipedia.org/wiki/2025%E2%80%942026%E5%B9%B4%E4%BC%8A%E6%8A%97%E8%AE%AE%E6%B4%BB%E5%8A%A8" class="source-link" target="_blank">维基百科</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -654,7 +746,11 @@
                             • 伊朗官方证实最高领袖阿里·哈梅内伊身亡<br>
                             • 宣布全国哀悼40天
                         </div>
-                        <div class="timeline-source">来源：Wikipedia</div>
+                        <div class="timeline-source">
+                            <div class="source-links">
+                                <span class="source-link-item">📰 <a href="https://zh.wikipedia.org/wiki/2026%E5%B9%B4%E7%BE%8E%E5%9B%BD%E5%86%B2%E5%89%8D" class="source-link" target="_blank">维基百科</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -665,7 +761,8 @@
             <p style="margin-top: 15px; font-size: 0.9em; color: #4ecca3;">
                 ✅ 按日期分组的事件脉络<br>
                 • 点击顶部按钮筛选日期，或"查看全部"看完整时间线<br>
-                • 所有事件均来自公开新闻报道和官方声明
+                • 点击"📰 链接"查看原始新闻报道<br>
+                • 所有事件均标注来源，支持跳转查看详情
             </p>
         </div>
     </div>
