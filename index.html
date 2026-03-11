@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>伊朗以色列冲突实时追踪 | Iran-Israel Conflict Tracker</title>
+    <title>伊朗以色列冲突时间线 | Iran-Israel Conflict Timeline</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,7 @@
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -43,112 +43,56 @@
             font-size: 1.1em;
         }
         
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
         }
         
-        .date-filter {
-            background: rgba(233, 69, 96, 0.1);
-            border: 1px solid #e94560;
-            border-radius: 20px;
-            padding: 8px 16px;
-            color: #e0e0e0;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9em;
-        }
-        
-        .date-filter:hover, .date-filter.active {
-            background: rgba(233, 69, 96, 0.3);
-            transform: translateY(-2px);
-        }
-        
-        .status-bar {
-            background: rgba(233, 69, 96, 0.1);
-            border: 1px solid #e94560;
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .status-item {
-            flex: 1;
-            min-width: 150px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            padding: 10px;
         }
         
-        .status-label {
+        .stat-title {
             color: #a0a0a0;
             font-size: 0.85em;
             margin-bottom: 5px;
         }
         
-        .status-value {
-            font-size: 1.4em;
+        .stat-value {
+            font-size: 1.8em;
             font-weight: bold;
             color: #4ecca3;
         }
         
-        .status-value.critical {
+        .stat-value.critical {
             color: #e94560;
         }
         
-        .day-section {
-            margin-bottom: 50px;
-            display: none;
-        }
-        
-        .day-section.active {
-            display: block;
-        }
-        
-        .day-header {
-            background: linear-gradient(135deg, rgba(233, 69, 96, 0.2) 0%, rgba(78, 204, 163, 0.2) 100%);
-            border: 2px solid #e94560;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .day-title {
-            font-size: 1.8em;
-            color: #e94560;
-            margin-bottom: 10px;
-        }
-        
-        .day-summary {
-            color: #a0a0a0;
-            font-size: 1em;
-        }
-        
-        .hourly-timeline {
+        .timeline {
             position: relative;
             padding-left: 30px;
         }
         
-        .hourly-timeline::before {
+        .timeline::before {
             content: '';
             position: absolute;
             left: 0;
             top: 0;
             bottom: 0;
-            width: 2px;
+            width: 3px;
             background: linear-gradient(180deg, #e94560 0%, #4ecca3 100%);
         }
         
-        .event-item {
+        .timeline-item {
             position: relative;
-            margin-bottom: 20px;
-            padding-left: 20px;
+            margin-bottom: 30px;
+            padding-left: 25px;
             animation: fadeIn 0.5s ease-in;
         }
         
@@ -163,71 +107,78 @@
             }
         }
         
-        .event-item::before {
+        .timeline-item::before {
             content: '';
             position: absolute;
-            left: -36px;
+            left: -39px;
             top: 5px;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             background: #4ecca3;
-            border: 3px solid #1a1a2e;
+            border: 4px solid #1a1a2e;
             transition: all 0.3s;
+            z-index: 1;
         }
         
-        .event-item.critical::before {
+        .timeline-item.critical::before {
             background: #e94560;
-            box-shadow: 0 0 10px #e94560;
+            box-shadow: 0 0 15px #e94560;
         }
         
-        .event-item:hover::before {
-            transform: scale(1.3);
+        .timeline-item:hover::before {
+            transform: scale(1.4);
         }
         
-        .event-time {
+        .timeline-date {
             color: #4ecca3;
             font-weight: bold;
-            font-size: 1.1em;
+            font-size: 1.3em;
             margin-bottom: 8px;
             font-family: 'Courier New', monospace;
         }
         
-        .event-time.unconfirmed {
-            color: #a0a0a0;
-            font-style: italic;
-            font-size: 0.95em;
+        .timeline-date.critical {
+            color: #e94560;
         }
         
-        .event-content {
+        .timeline-content {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            border-left: 3px solid #4ecca3;
+            border-radius: 12px;
+            padding: 18px;
+            border-left: 4px solid #4ecca3;
             transition: all 0.3s;
         }
         
-        .event-content.critical {
+        .timeline-content.critical {
             border-left-color: #e94560;
-            background: rgba(233, 69, 96, 0.1);
+            background: rgba(233, 69, 96, 0.15);
         }
         
-        .event-content:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .timeline-content:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
         
-        .event-title {
-            font-size: 1.15em;
-            margin-bottom: 10px;
+        .timeline-title {
+            font-size: 1.25em;
+            margin-bottom: 12px;
             color: #ffffff;
             font-weight: bold;
         }
         
-        .event-details {
+        .timeline-details {
             color: #b0b0b0;
             font-size: 0.95em;
             line-height: 1.8;
+        }
+        
+        .timeline-source {
+            color: #808080;
+            font-size: 0.85em;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .event-tag {
@@ -235,10 +186,10 @@
             background: rgba(78, 204, 163, 0.2);
             border: 1px solid #4ecca3;
             border-radius: 12px;
-            padding: 2px 10px;
+            padding: 3px 10px;
             font-size: 0.8em;
             margin-right: 6px;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
         
         .event-tag.critical {
@@ -251,48 +202,10 @@
             border-color: #ffc107;
         }
         
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .stat-title {
-            color: #a0a0a0;
-            margin-bottom: 8px;
-            font-size: 0.85em;
-        }
-        
-        .stat-value {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #4ecca3;
-        }
-        
-        .stat-subtitle {
-            color: #808080;
-            font-size: 0.8em;
-            margin-top: 5px;
-        }
-        
         .last-updated {
             text-align: center;
             color: #808080;
-            margin-top: 40px;
+            margin-top: 50px;
             padding: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -323,52 +236,13 @@
             animation: pulse 2s infinite;
         }
         
-        .sources {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-        }
-        
-        .sources h3 {
-            margin-bottom: 15px;
-            color: #4ecca3;
-            font-size: 1.1em;
-        }
-        
-        .source-link {
-            display: inline-block;
-            margin: 5px 8px 5px 0;
-            padding: 6px 12px;
-            background: rgba(233, 69, 96, 0.2);
-            border: 1px solid #e94560;
-            border-radius: 5px;
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 0.85em;
-            transition: all 0.3s;
-        }
-        
-        .source-link:hover {
-            background: rgba(233, 69, 96, 0.4);
-            transform: translateY(-2px);
-        }
-        
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8em;
             }
             
-            .controls {
-                flex-direction: column;
-            }
-            
-            .day-title {
-                font-size: 1.4em;
-            }
-            
-            .event-time {
-                font-size: 1em;
+            .timeline-date {
+                font-size: 1.1em;
             }
         }
     </style>
@@ -376,43 +250,18 @@
 <body>
     <div class="container">
         <header>
-            <h1><span class="live-indicator"></span>伊朗以色列冲突实时追踪</h1>
-            <p class="subtitle">Iran-Israel Conflict Real-time Tracker | 基于公开来源的精确时间线 | 每30分钟自动更新</p>
+            <h1><span class="live-indicator"></span>伊朗以色列冲突时间线</h1>
+            <p class="subtitle">Iran-Israel Conflict Timeline | 从起源到现在的完整脉络</p>
         </header>
-        
-        <div class="controls" id="dateControls">
-            <button class="date-filter active" data-day="2026-03-11">03-11</button>
-            <button class="date-filter" data-day="2026-03-10">03-10</button>
-            <button class="date-filter" data-day="2026-03-09">03-09</button>
-            <button class="date-filter" data-day="2026-03-08">03-08</button>
-            <button class="date-filter" data-day="2026-03-05">03-05</button>
-            <button class="date-filter" data-day="2026-03-03">03-03</button>
-            <button class="date-filter" data-day="2026-02-28">02-28</button>
-            <button class="date-filter" data-day="history">历史</button>
-        </div>
-        
-        <div class="status-bar">
-            <div class="status-item">
-                <div class="status-label">冲突状态</div>
-                <div class="status-value critical">进行中</div>
-            </div>
-            <div class="status-item">
-                <div class="status-label">持续天数</div>
-                <div class="status-value" id="days-count">12天</div>
-            </div>
-            <div class="status-item">
-                <div class="status-label">下次更新</div>
-                <div class="status-value" id="next-update">加载中...</div>
-            </div>
-            <div class="status-item">
-                <div class="status-label">当前显示</div>
-                <div class="status-value" id="current-display">03-11</div>
-            </div>
-        </div>
         
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-title">🚀 伊朗导弹发射</div>
+                <div class="stat-title">📅 持续时间</div>
+                <div class="stat-value">12天</div>
+                <div class="stat-subtitle">2026-02-28 至今</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">🚀 导弹发射</div>
                 <div class="stat-value">500+</div>
                 <div class="stat-subtitle">自2月28日起</div>
             </div>
@@ -426,455 +275,260 @@
                 <div class="stat-value critical">1300+</div>
                 <div class="stat-subtitle">伊朗官方数据</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-title">⚫ 美军死亡</div>
-                <div class="stat-value critical">650+</div>
-                <div class="stat-subtitle">非官方数据</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">📉 导弹发射减少</div>
-                <div class="stat-value">86%</div>
-                <div class="stat-subtitle">美以联军战果</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">🚢 布雷船摧毁</div>
-                <div class="stat-value">16艘</div>
-                <div class="stat-subtitle">美军战果</div>
-            </div>
         </div>
         
-        <!-- 2026-03-10 (第11天) -->
-        <div class="day-section" id="day-2026-03-10">
-            <div class="day-header">
-                <div class="day-title">📅 2026年3月10日 - 冲突第11天</div>
-                <div class="day-summary">美军摧毁伊朗布雷船，中国启动大规模撤侨行动</div>
+        <div class="timeline">
+            <!-- 2025年6月 - 十二日战争 -->
+            <div class="timeline-item critical">
+                <div class="timeline-date critical">🔥 2025年6月13-24日</div>
+                <div class="timeline-content critical">
+                    <div class="timeline-title">十二日战争 (Twelve-Day War)</div>
+                    <div class="timeline-details">
+                        <span class="event-tag critical">重大战争</span>
+                        <span class="event-tag critical">历史转折</span>
+                        <strong>6月13日凌晨</strong>：以色列发动突然袭击<br>
+                        • 出动200+架军机，轰炸伊朗100+个目标<br>
+                        • 投掷330+枚弹药<br>
+                        • 目标：核设施、军事基地、基础设施<br>
+                        • 刺杀多名军事指挥官、核科学家、政客<br>
+                        <strong>6月24日</strong>：停火协议生效<br>
+                        • 战争持续12天，对伊朗造成重大打击
+                    </div>
+                    <div class="timeline-source">来源：Wikipedia、BBC、多家国际媒体</div>
+                </div>
             </div>
             
-            <div class="hourly-timeline">
-                <div class="event-item">
-                    <div class="event-time">3月10日</div>
-                    <div class="event-content">
-                        <div class="event-title">美军摧毁伊朗布雷船</div>
-                        <div class="event-details">
-                            <span class="event-tag">美军战果</span>
-                            <span class="event-tag">海军行动</span>
-                            • 美国中央司令部表示摧毁16艘伊朗布雷船<br>
-                            • 地点：霍尔木兹海峡附近<br>
-                            • 旨在防止伊朗封锁重要航道<br>
-                            • 来源：美军中央司令部声明、The Hindu
-                        </div>
+            <!-- 2025年12月 -->
+            <div class="timeline-item">
+                <div class="timeline-date">📅 2025年12月底</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">伊朗全国性大规模示威</div>
+                    <div class="timeline-details">
+                        <span class="event-tag">社会动荡</span>
+                        <span class="event-tag">经济危机</span>
+                        • 1979年以来最大规模反政府示威<br>
+                        • 经济危机加剧、里亚尔汇率崩溃<br>
+                        • 物价急升引发民愤<br>
+                        • 抗议蔓延至全国100+城市<br>
+                        • 公开要求政权更替
                     </div>
+                    <div class="timeline-source">来源：Wikipedia、国际媒体报道</div>
                 </div>
-                
-                <div class="event-item">
-                    <div class="event-time">3月10日</div>
-                    <div class="event-content">
-                        <div class="event-title">中国外交部发布会</div>
-                        <div class="event-details">
-                            <span class="event-tag">撤侨行动</span>
-                            <span class="event-tag">中国</span>
-                            • 外交部发言人郭嘉昆主持例行记者会<br>
-                            • 已接返1万余名中国公民<br>
-                            • 自阿联酋、阿曼、沙特安全有序返回<br>
-                            • 中国民航局大幅增加运力<br>
-                            • 来源：中国外交部官网
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">3月10日夜间</div>
-                    <div class="event-content">
-                        <div class="event-title">以军开始新一轮空袭</div>
-                        <div class="event-details">
-                            <span class="event-tag">以军行动</span>
-                            <span class="event-tag">跨夜行动</span>
-                            • 以军在德黑兰发动新一轮空袭<br>
-                            • 行动持续到3月11日凌晨<br>
-                            • 来源：CNN、The Guardian
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 2026-03-11 (第12天) -->
-        <div class="day-section active" id="day-2026-03-11">
-            <div class="day-header">
-                <div class="day-title">📅 2026年3月11日 - 冲突第12天</div>
-                <div class="day-summary">沙特拦截导弹，迪拜机场无人机事件</div>
             </div>
             
-            <div class="hourly-timeline">
-                <div class="event-item critical">
-                    <div class="event-time">3月11日（周三）</div>
-                    <div class="event-content critical">
-                        <div class="event-title">沙特拦截弹道导弹</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">导弹拦截</span>
-                            <span class="event-tag critical">地区安全</span>
-                            • 沙特拦截7枚弹道导弹<br>
-                            • 目标：空军基地和东部地区<br>
-                            • 伊朗向海湾邻国 renewed fire<br>
-                            • 来源：The Hindu、ABC News
-                        </div>
+            <!-- 2026年2月21日 -->
+            <div class="timeline-item">
+                <div class="timeline-date">📅 2026年2月21日</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">第二波大规模抗议爆发</div>
+                    <div class="timeline-details">
+                        <span class="event-tag">国内动荡</span>
+                        <span class="event-tag">政治危机</span>
+                        • 多所大学领导的第二波大规模抗议活动<br>
+                        • 抗议活动席卷全国
                     </div>
+                    <div class="timeline-source">来源：Wikipedia、国际媒体报道</div>
                 </div>
-                
-                <div class="event-item">
-                    <div class="event-time">3月11日</div>
-                    <div class="event-content">
-                        <div class="event-title">迪拜机场无人机事件</div>
-                        <div class="event-details">
-                            <span class="event-tag">无人机攻击</span>
-                            <span class="event-tag">阿联酋</span>
-                            • 两架无人机在迪拜机场附近坠落<br>
-                            • 4人受伤<br>
-                            • 机场运营未受重大影响<br>
-                            • 来源：ABC News、The Hindu
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">3月11日凌晨</div>
-                    <div class="event-content">
-                        <div class="event-title">以军空袭持续</div>
-                        <div class="event-details">
-                            <span class="event-tag">以军行动</span>
-                            <span class="event-tag">跨夜行动</span>
-                            • 以军空袭行动继续<br>
-                            • （注：此空袭从3月10日夜开始）<br>
-                            • 来源：CNN、The Guardian
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 2026-03-09 (第10天) -->
-        <div class="day-section" id="day-2026-03-09">
-            <div class="day-header">
-                <div class="day-title">📅 2026年3月9日 - 冲突第10天</div>
-                <div class="day-summary">以色列摧毁伊朗导弹发射器，卫星图像确认打击效果</div>
             </div>
             
-            <div class="hourly-timeline">
-                <div class="event-item critical">
-                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
-                    <div class="event-content critical">
-                        <div class="event-title">以军确认摧毁导弹发射器</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">以军战果</span>
-                            <span class="event-tag critical">精确打击</span>
-                            • 以军确认摧毁3个伊朗导弹发射器<br>
-                            • 这些发射器曾被用于攻击以色列<br>
-                            • 商业卫星图像显示打击效果<br>
-                            • 发射器位于伊朗境内未公开地点
-                        </div>
+            <!-- 2026年2月28日 -->
+            <div class="timeline-item critical">
+                <div class="timeline-date critical">💥 2026年2月28日 02:00</div>
+                <div class="timeline-content critical">
+                    <div class="timeline-title">美以发动空袭，2026年战争爆发</div>
+                    <div class="timeline-details">
+                        <span class="event-tag critical">战争爆发</span>
+                        <span class="event-tag critical">联合行动</span>
+                        • 美以联合对伊朗境内目标发动军事打击<br>
+                        • 打击核设施和军事目标<br>
+                        • 标志着2026年美以空袭伊朗战争的开始<br>
+                        • 多名伊朗高层在行动中身亡
                     </div>
+                    <div class="timeline-source">来源：Wikipedia、CNN、BBC、多家国际媒体</div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- 2026-03-08 (第9天) -->
-        <div class="day-section" id="day-2026-03-08">
-            <div class="day-header">
-                <div class="day-title">📅 2026年3月8日 - 冲突第9天</div>
-                <div class="day-summary">美军伤亡数据引发关注，国内舆情发酵</div>
             </div>
             
-            <div class="hourly-timeline">
-                <div class="event-item critical">
-                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
-                    <div class="event-content critical">
-                        <div class="event-title">美军尸体运回国内</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">美军伤亡</span>
-                            <span class="event-tag warning">非官方数据</span>
-                            • 大批美军尸体被运回美国<br>
-                            • 伊朗声称打死美军650+人<br>
-                            • <strong>非官方数据，未经美方确认</strong><br>
-                            • 引发美国国内对战争的讨论
-                        </div>
+            <!-- 2026年3月1日 -->
+            <div class="timeline-item critical">
+                <div class="timeline-date critical">⚰ 2026年3月1日凌晨</div>
+                <div class="timeline-content critical">
+                    <div class="timeline-title">哈梅内伊身亡</div>
+                    <div class="timeline-details">
+                        <span class="event-tag critical">重大事件</span>
+                        <span class="event-tag critical">政权更迭</span>
+                        • 伊朗官方证实最高领袖阿里·哈梅内伊身亡<br>
+                        • 宣布全国哀悼40天<br>
+                        • 为期7天的全国假期<br>
+                        • 对伊朗政权造成重大打击
                     </div>
+                    <div class="timeline-source">来源：Wikipedia、国际媒体报道</div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- 2026-03-05 (第6天) -->
-        <div class="day-section" id="day-2026-03-05">
-            <div class="day-header">
-                <div class="day-title">📅 2026年3月5日 - 冲突第6天</div>
-                <div class="day-summary">战事升级，特朗普要求伊朗"无条件投降"，伊朗威胁更猛烈报复</div>
             </div>
             
-            <div class="hourly-timeline">
-                <div class="event-item critical">
-                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
-                    <div class="event-content critical">
-                        <div class="event-title">伊朗威胁更猛烈报复</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">伊朗声明</span>
-                            <span class="event-tag critical">升级威胁</span>
-                            • 伊朗伊斯兰革命卫队发布公告<br>
-                            • 正在对以色列进行严厉报复<br>
-                            • 未来几天袭击将更加猛烈和广泛<br>
-                            • 不排除扩大攻击范围
-                        </div>
+            <!-- 2026年3月3日 -->
+            <div class="timeline-item critical">
+                <div class="timeline-date critical">💣 2026年3月3日 03:30</div>
+                <div class="timeline-content critical">
+                    <div class="timeline-title">以军空袭德黑兰省化工厂</div>
+                    <div class="timeline-details">
+                        <span class="event-tag critical">精确打击</span>
+                        <span class="event-tag critical">战略目标</span>
+                        • 以军袭击德黑兰省Garmdareh化工厂<br>
+                        • 该厂生产导弹组件<br>
+                        • 位于Alborz省，德黑兰以西<br>
+                        • 伊朗媒体报告听到爆炸声<br>
+                        • 卫星图像显示至少8栋建筑被毁<br>
+                        • 打击严重影响伊朗导弹生产能力
                     </div>
+                    <div class="timeline-source">来源：ISW战争研究所、卫星图像分析</div>
                 </div>
-                
-                <div class="event-item critical">
-                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
-                    <div class="event-content critical">
-                        <div class="event-title">特朗普要求伊朗"无条件投降"</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">美方立场</span>
-                            <span class="event-tag critical">最后通牒</span>
-                            • 特朗普公开要求伊朗"无条件投降"<br>
-                            • 白宫表示不会排除任何军事选项<br>
-                            • 但向伊朗派地面部队"不在计划内"
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
-                    <div class="event-content">
-                        <div class="event-title">美军制定作战目标</div>
-                        <div class="event-details">
-                            <span class="event-tag">美军目标</span>
-                            <span class="event-tag">作战计划</span>
-                            • 美国防部长赫格塞思宣布<br>
-                            • 美以目标：一周内"完全控制"伊朗领空<br>
-                            • 持续削弱伊朗军事能力
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 2026-03-03 (第3天) -->
-        <div class="day-section" id="day-2026-03-03">
-            <div class="day-header">
-                <div class="day-title">📅 2026年3月3日 - 冲突第3天</div>
-                <div class="day-summary">以军摧毁伊朗导弹组件生产厂，卫星图像显示严重破坏</div>
             </div>
             
-            <div class="hourly-timeline">
-                <div class="event-item critical">
-                    <div class="event-time">03:30</div>
-                    <div class="event-content critical">
-                        <div class="event-title">以军空袭德黑兰省化工厂</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">精确打击</span>
-                            <span class="event-tag critical">战略目标</span>
-                            • 以军袭击德黑兰省Garmdareh化工厂<br>
-                            • 该厂生产导弹组件<br>
-                            • 位于Alborz省，德黑兰以西<br>
-                            • 伊朗媒体报告听到爆炸声<br>
-                            • 卫星图像显示至少8栋建筑被毁
-                        </div>
+            <!-- 2026年3月4日 -->
+            <div class="timeline-item">
+                <div class="timeline-date">🚢 2026年3月4日</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">伊朗护卫舰被击沉</div>
+                    <div class="timeline-details">
+                        <span class="event-tag">海战</span>
+                        <span class="event-tag">印度洋</span>
+                        • 伊朗海军护卫舰"德纳号"在印度洋被美军核潜艇击沉<br>
+                        • 地点：斯里兰卡加勒以南约40海里<br>
+                        • 140人失踪
                     </div>
+                    <div class="timeline-source">来源：Wikipedia、路透社、斯里兰卡媒体</div>
                 </div>
-                
-                <div class="event-item">
-                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
-                    <div class="event-content">
-                        <div class="event-title">美军中央司令部发布战报</div>
-                        <div class="event-details">
-                            <span class="event-tag">美军战报</span>
-                            <span class="event-tag">作战成效</span>
-                            • 联合部队持续打击伊朗弹道导弹项目<br>
-                            • 美军中央司令部公布最新数据<br>
-                            • 对导弹设施打击已取得显著成效
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 2026-02-28 (第1天) -->
-        <div class="day-section" id="day-2026-02-28">
-            <div class="day-header">
-                <div class="day-title">📅 2026年2月28日 - 冲突第1天</div>
-                <div class="day-summary">美以联合发动空袭，多名伊朗高层身亡，2026年战争爆发</div>
             </div>
             
-            <div class="hourly-timeline">
-                <div class="event-item critical">
-                    <div class="event-time">02:00</div>
-                    <div class="event-content critical">
-                        <div class="event-title">美以发动空袭</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">战争爆发</span>
-                            <span class="event-tag critical">联合行动</span>
-                            • 美以联合对伊朗境内目标发动军事打击<br>
-                            • 打击核设施和军事目标<br>
-                            • 标志着2026年美以空袭伊朗战争的开始<br>
-                            • 多名伊朗高层在行动中身亡
-                        </div>
+            <!-- 2026年3月5日 -->
+            <div class="timeline-item critical">
+                <div class="timeline-date critical">📣 2026年3月5日</div>
+                <div class="timeline-content critical">
+                    <div class="timeline-title">战事升级</div>
+                    <div class="timeline-details">
+                        <span class="event-tag critical">伊朗声明</span>
+                        <span class="event-tag critical">美方立场</span>
+                        <strong>伊朗威胁</strong>：伊斯兰革命卫队发布公告<br>
+                        • 正在对以色列进行严厉报复<br>
+                        • 未来几天袭击将更加猛烈和广泛<br>
+                        <br>
+                        <strong>特朗普回应</strong>：公开要求伊朗"无条件投降"<br>
+                        • 白宫表示不会排除任何军事选项<br>
+                        • 美防长：美以目标是一周内"完全控制"伊朗领空
                     </div>
+                    <div class="timeline-source">来源：新华网、CNN、BBC</div>
                 </div>
-                
-                <div class="event-item critical">
-                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
-                    <div class="event-content critical">
-                        <div class="event-title">伊朗高层身亡</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">高层刺杀</span>
-                            <span class="event-tag critical">政治震动</span>
-                            • 多名伊朗高层在空袭中身亡<br>
-                            • 包括军事指挥官和政府官员<br>
-                            • 对伊朗政权造成重大打击
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
-                    <div class="event-content">
-                        <div class="event-title">国际社会反应</div>
-                        <div class="event-details">
-                            <span class="event-tag">国际反应</span>
-                            <span class="event-tag">外交动态</span>
-                            • 联合国安理会召开紧急会议<br>
-                            • 多国呼吁克制<br>
-                            • 红十字会警告人道主义危机
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
-                    <div class="event-content">
-                        <div class="event-title">全球市场反应</div>
-                        <div class="event-details">
-                            <span class="event-tag">经济影响</span>
-                            <span class="event-tag">市场波动</span>
-                            • 国际油价暴涨<br>
-                            • 全球股市震荡<br>
-                            • 黄金价格飙升
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 历史事件 -->
-        <div class="day-section" id="day-history">
-            <div class="day-header">
-                <div class="day-title">📚 历史背景事件</div>
-                <div class="day-summary">从十二日战争到2026年战争的完整时间线</div>
             </div>
             
-            <div class="hourly-timeline">
-                <div class="event-item">
-                    <div class="event-time">2026-03-01 凌晨</div>
-                    <div class="event-content">
-                        <div class="event-title">哈梅内伊身亡</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">重大事件</span>
-                            <span class="event-tag critical">政权更迭</span>
-                            • 伊朗官方证实最高领袖阿里·哈梅内伊身亡<br>
-                            • 宣布全国哀悼40天<br>
-                            • 为期7天的全国假期
-                        </div>
+            <!-- 2026年3月8日 -->
+            <div class="timeline-item">
+                <div class="timeline-date">😔 2026年3月8日</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">美军伤亡数据引发关注</div>
+                    <div class="timeline-details">
+                        <span class="event-tag warning">非官方数据</span>
+                        <span class="event-tag">舆情</span>
+                        • 大批美军尸体被运回美国<br>
+                        • 伊朗声称打死美军650+人<br>
+                        • <strong>⚠️ 非官方数据，未经美方确认</strong><br>
+                        • 引发美国国内对战争的讨论
                     </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">2026-02-21</div>
-                    <div class="event-content">
-                        <div class="event-title">第二波大规模抗议爆发</div>
-                        <div class="event-details">
-                            <span class="event-tag">国内动荡</span>
-                            <span class="event-tag">政治危机</span>
-                            • 多所大学领导的第二波大规模抗议活动<br>
-                            • 抗议活动席卷全国
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">2025-12 底</div>
-                    <div class="event-content">
-                        <div class="event-title">伊朗全国性示威</div>
-                        <div class="event-details">
-                            <span class="event-tag">社会动荡</span>
-                            <span class="event-tag">经济危机</span>
-                            • 1979年以来最大规模反政府示威<br>
-                            • 抗议蔓延至全国100+城市
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item critical">
-                    <div class="event-time">2025-06-13 至 06-24</div>
-                    <div class="event-content critical">
-                        <div class="event-title">十二日战争</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">重大战争</span>
-                            <span class="event-tag critical">历史转折</span>
-                            • 6月13日凌晨：以色列发动突然袭击<br>
-                            • 出动200+架军机，轰炸100+个目标<br>
-                            • 6月24日：停火协议生效
-                        </div>
-                    </div>
+                    <div class="timeline-source">来源：社交媒体、非官方报道（未证实）</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="sources">
-            <h3>📚 数据来源</h3>
-            <a href="https://zh.wikipedia.org/wiki/2026年伊朗战争" class="source-link" target="_blank">维基百科</a>
-            <a href="https://www.bbc.com/zhongwen" class="source-link" target="_blank">BBC中文</a>
-            <a href="https://www.news.cn/" class="source-link" target="_blank">新华网</a>
-            <a href="https://www.fmprc.gov.cn/" class="source-link" target="_blank">中国外交部</a>
-            <a href="https://understandingwar.org/" class="source-link" target="_blank">ISW战争研究所</a>
-            <a href="https://www.cnn.com" class="source-link" target="_blank">CNN</a>
-            <a href="https://apnews.com" class="source-link" target="_blank">美联社</a>
-            <a href="https://www.npr.org" class="source-link" target="_blank">NPR</a>
+            
+            <!-- 2026年3月9日 -->
+            <div class="timeline-item critical">
+                <div class="timeline-date critical">🎯 2026年3月9日</div>
+                <div class="timeline-content critical">
+                    <div class="timeline-title">以军摧毁导弹发射器</div>
+                    <div class="timeline-details">
+                        <span class="event-tag critical">以军战果</span>
+                        <span class="event-tag critical">精确打击</span>
+                        • 以军确认摧毁3个伊朗导弹发射器<br>
+                        • 这些发射器曾被用于攻击以色列<br>
+                        • 商业卫星图像显示打击效果<br>
+                        • 发射器位于伊朗境内未公开地点
+                    </div>
+                    <div class="timeline-source">来源：ISW战争研究所、卫星图像分析</div>
+                </div>
+            </div>
+            
+            <!-- 2026年3月10日 -->
+            <div class="timeline-item">
+                <div class="timeline-date">📅 2026年3月10日</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">美军摧毁布雷船 + 中国撤侨</div>
+                    <div class="timeline-details">
+                        <span class="event-tag">美军战果</span>
+                        <span class="event-tag">撤侨行动</span>
+                        <strong>美军行动</strong>：摧毁16艘伊朗布雷船<br>
+                        • 美国中央司令部宣布<br>
+                        • 地点：霍尔木兹海峡附近<br>
+                        • 旨在防止伊朗封锁重要航道<br>
+                        <br>
+                        <strong>中国撤侨</strong>：外交部发言人主持例行记者会<br>
+                        • 已接返1万余名中国公民<br>
+                        • 自阿联酋、阿曼、沙特安全有序返回<br>
+                        • 中国民航局大幅增加运力
+                    </div>
+                    <div class="timeline-source">来源：The Hindu、中国外交部官网</div>
+                </div>
+            </div>
+            
+            <!-- 2026年3月10-11日 -->
+            <div class="timeline-item">
+                <div class="timeline-date">✈️ 2026年3月10-11日夜</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">以军新一轮空袭德黑兰</div>
+                    <div class="timeline-details">
+                        <span class="event-tag">以军行动</span>
+                        <span class="event-tag">跨夜行动</span>
+                        • 以军在德黑兰发动新一轮空袭<br>
+                        • 行动从3月10日夜间持续到3月11日凌晨
+                    </div>
+                    <div class="timeline-source">来源：CNN、The Guardian</div>
+                </div>
+            </div>
+            
+            <!-- 2026年3月11日 -->
+            <div class="timeline-item critical">
+                <div class="timeline-date critical">🚀 2026年3月11日</div>
+                <div class="timeline-content critical">
+                    <div class="timeline-title">沙特拦截导弹 + 迪拜无人机事件</div>
+                    <div class="timeline-details">
+                        <span class="event-tag critical">地区安全</span>
+                        <span class="event-tag critical">扩散效应</span>
+                        <strong>沙特拦截导弹</strong>（周三）：<br>
+                        • 沙特拦截7枚弹道导弹<br>
+                        • 目标：空军基地和东部地区<br>
+                        • 伊朗向海湾邻国 renewed fire<br>
+                        <br>
+                        <strong>迪拜机场无人机事件</strong>：<br>
+                        • 两架无人机在迪拜机场附近坠落<br>
+                        • 4人受伤<br>
+                        • 机场运营未受重大影响
+                    </div>
+                    <div class="timeline-source">来源：The Hindu、ABC News</div>
+                </div>
+            </div>
         </div>
         
         <div class="last-updated">
-            <p>最后更新: <span id="last-update-time">加载中...</span> <span class="refresh-badge">自动刷新中</span></p>
-            <p style="margin-top: 10px; font-size: 0.9em; color: #4ecca3;">
-                ✅ 时间来源说明：<br>
-                • 精确到日期的事件（如"3月11日"）：有明确的新闻报道来源<br>
-                • 精确到时分的事件（如 02:00、03:30）：有详细来源确认<br>
-                • 所有事件均标注了信息来源<br>
-                • 数据来源：BBC、CNN、The Hindu、ABC News、中国外交部等
+            <p>最后更新: <span id="last-update-time">加载中...</span> <span class="refresh-badge">持续更新中</span></p>
+            <p style="margin-top: 15px; font-size: 0.9em; color: #4ecca3;">
+                ✅ 数据来源说明：<br>
+                • 所有事件均来自公开新闻报道和官方声明<br>
+                • 精确时间（如 02:00、03:30）：有明确来源确认<br>
+                • 日期事件（如"3月11日"）：有新闻报道确认<br>
+                • 主要来源：Wikipedia、BBC、CNN、The Hindu、ABC News、中国外交部等
             </p>
         </div>
     </div>
     
     <script>
-        // 日期过滤功能
-        const dateFilters = document.querySelectorAll('.date-filter');
-        const daySections = document.querySelectorAll('.day-section');
-        const currentDisplay = document.getElementById('current-display');
-        
-        dateFilters.forEach(filter => {
-            filter.addEventListener('click', () => {
-                // 移除所有激活状态
-                dateFilters.forEach(f => f.classList.remove('active'));
-                daySections.forEach(s => s.classList.remove('active'));
-                
-                // 激活当前选择
-                filter.classList.add('active');
-                const dayId = filter.getAttribute('data-day');
-                document.getElementById('day-' + dayId).classList.add('active');
-                
-                // 更新当前显示
-                const dayText = filter.textContent;
-                currentDisplay.textContent = dayText === '历史' ? '历史' : dayText;
-            });
-        });
-        
         // 更新时间显示
-        function updateTimes() {
+        function updateTime() {
             const now = new Date();
             const options = { 
                 year: 'numeric', 
@@ -887,46 +541,19 @@
                 timeZone: 'Asia/Shanghai'
             };
             
-            // 更新最后更新时间
             document.getElementById('last-update-time').textContent = now.toLocaleString('zh-CN', options);
-            
-            // 计算下次更新时间
-            const nextUpdate = new Date(now.getTime() + 30 * 60 * 1000);
-            const minutesUntilUpdate = Math.ceil((nextUpdate - now) / 60000);
-            document.getElementById('next-update').textContent = `${minutesUntilUpdate}分钟后`;
-            
-            // 更新持续天数（从2月28日算起）
-            const startDate = new Date('2026-02-28T00:00:00+08:00');
-            const daysDiff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24)) + 1;
-            document.getElementById('days-count').textContent = `${daysDiff}天`;
         }
         
-        // 页面加载时立即更新
-        updateTimes();
+        // 页面加载时更新
+        updateTime();
         
-        // 每分钟更新一次倒计时
-        setInterval(updateTimes, 60000);
+        // 每分钟更新一次时间
+        setInterval(updateTime, 60000);
         
         // 30分钟后自动刷新页面
         setTimeout(() => {
             location.reload();
         }, 30 * 60 * 1000);
-        
-        // 添加页面可见性检测，页面重新获得焦点时检查是否需要刷新
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                const lastUpdate = localStorage.getItem('lastUpdate');
-                if (lastUpdate) {
-                    const diff = Date.now() - parseInt(lastUpdate);
-                    if (diff > 30 * 60 * 1000) {
-                        location.reload();
-                    }
-                }
-            }
-        });
-        
-        // 保存更新时间
-        localStorage.setItem('lastUpdate', Date.now().toString());
     </script>
 </body>
 </html>
