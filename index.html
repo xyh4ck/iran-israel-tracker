@@ -188,9 +188,15 @@
         .event-time {
             color: #4ecca3;
             font-weight: bold;
-            font-size: 1.15em;
+            font-size: 1.1em;
             margin-bottom: 8px;
             font-family: 'Courier New', monospace;
+        }
+        
+        .event-time.unconfirmed {
+            color: #a0a0a0;
+            font-style: italic;
+            font-size: 0.95em;
         }
         
         .event-content {
@@ -238,6 +244,11 @@
         .event-tag.critical {
             background: rgba(233, 69, 96, 0.2);
             border-color: #e94560;
+        }
+        
+        .event-tag.warning {
+            background: rgba(255, 193, 7, 0.2);
+            border-color: #ffc107;
         }
         
         .stats-grid {
@@ -366,7 +377,7 @@
     <div class="container">
         <header>
             <h1><span class="live-indicator"></span>伊朗以色列冲突实时追踪</h1>
-            <p class="subtitle">Iran-Israel Conflict Real-time Tracker | 精确到分钟 | 每30分钟自动更新</p>
+            <p class="subtitle">Iran-Israel Conflict Real-time Tracker | 基于公开来源的精确时间线 | 每30分钟自动更新</p>
         </header>
         
         <div class="controls" id="dateControls">
@@ -441,20 +452,21 @@
             
             <div class="hourly-timeline">
                 <div class="event-item">
-                    <div class="event-time">08:30</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content">
                         <div class="event-title">美军摧毁伊朗布雷船</div>
                         <div class="event-details">
                             <span class="event-tag">美军战果</span>
                             <span class="event-tag">海军行动</span>
                             • 美军中央司令部宣布摧毁16艘伊朗布雷船<br>
-                            • 这些船只曾在波斯湾和霍尔木兹海峡活动
+                            • 这些船只曾在波斯湾和霍尔木兹海峡活动<br>
+                            • 旨在防止伊朗封锁重要航道
                         </div>
                     </div>
                 </div>
                 
                 <div class="event-item critical">
-                    <div class="event-time">10:15</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content critical">
                         <div class="event-title">伊朗威胁封锁霍尔木兹海峡</div>
                         <div class="event-details">
@@ -468,29 +480,15 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">14:45</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content">
                         <div class="event-title">迪拜机场无人机事件</div>
                         <div class="event-details">
                             <span class="event-tag">无人机攻击</span>
-                            <span class="event-tag">阿联酋</span>
+                            <span class="event-tag warning">时间待确认</span>
                             • 迪拜机场附近发生无人机事件<br>
                             • 4人在事件中受伤<br>
                             • 机场运营未受重大影响
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">18:20</div>
-                    <div class="event-content">
-                        <div class="event-title">美以联军持续打击</div>
-                        <div class="event-details">
-                            <span class="event-tag">联合行动</span>
-                            <span class="event-tag">持续打击</span>
-                            • 美以联军继续对伊朗境内目标进行打击<br>
-                            • 重点削弱伊朗军事能力<br>
-                            • 保护地区盟友安全
                         </div>
                     </div>
                 </div>
@@ -512,38 +510,10 @@
                         <div class="event-details">
                             <span class="event-tag">撤侨行动</span>
                             <span class="event-tag">中国</span>
-                            • 外交部发言人郭嘉昆主持例行记者会<br>
+                            • 外交部发言人郭嘉昆主持例行记者会（通常在上午9点）<br>
                             • 已接返1万余名中国公民<br>
                             • 自阿联酋、阿曼、沙特安全有序返回<br>
                             • 中国民航局大幅增加运力
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">11:30</div>
-                    <div class="event-content">
-                        <div class="event-title">外交部发布安全提醒</div>
-                        <div class="event-details">
-                            <span class="event-tag">安全提醒</span>
-                            <span class="event-tag">领事保护</span>
-                            • 提醒中国公民暂勿前往伊朗周边受冲突波及国家<br>
-                            • 中东地区部分机场尚未完全恢复正常<br>
-                            • 驻外使领馆将全力提供协助
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item critical">
-                    <div class="event-time">16:00</div>
-                    <div class="event-content critical">
-                        <div class="event-title">伊朗公布战果数据</div>
-                        <div class="event-details">
-                            <span class="event-tag critical">战果统计</span>
-                            <span class="event-tag critical">导弹数据</span>
-                            • 自2月28日以来发射500+枚弹道导弹/海军导弹<br>
-                            • 2000架无人机<br>
-                            • 40%瞄准以色列，60%瞄准美军目标
                         </div>
                     </div>
                 </div>
@@ -559,7 +529,7 @@
             
             <div class="hourly-timeline">
                 <div class="event-item critical">
-                    <div class="event-time">07:45</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content critical">
                         <div class="event-title">以军确认摧毁导弹发射器</div>
                         <div class="event-details">
@@ -569,20 +539,6 @@
                             • 这些发射器曾被用于攻击以色列<br>
                             • 商业卫星图像显示打击效果<br>
                             • 发射器位于伊朗境内未公开地点
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">13:20</div>
-                    <div class="event-content">
-                        <div class="event-title">卫星图像分析公布</div>
-                        <div class="event-details">
-                            <span class="event-tag">情报分析</span>
-                            <span class="event-tag">卫星图像</span>
-                            • 商业卫星图像确认打击效果<br>
-                            • 显示导弹发射器被完全摧毁<br>
-                            • 周围设施也受到严重损坏
                         </div>
                     </div>
                 </div>
@@ -598,30 +554,16 @@
             
             <div class="hourly-timeline">
                 <div class="event-item critical">
-                    <div class="event-time">10:00</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content critical">
                         <div class="event-title">美军尸体运回国内</div>
                         <div class="event-details">
                             <span class="event-tag critical">美军伤亡</span>
-                            <span class="event-tag critical">国内舆情</span>
+                            <span class="event-tag warning">非官方数据</span>
                             • 大批美军尸体被运回美国<br>
                             • 伊朗声称打死美军650+人<br>
-                            • 非官方数据，未经美方确认<br>
+                            • <strong>非官方数据，未经美方确认</strong><br>
                             • 引发美国国内对战争的讨论
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">19:30</div>
-                    <div class="event-content">
-                        <div class="event-title">社交媒体舆论发酵</div>
-                        <div class="event-details">
-                            <span class="event-tag">社交媒体</span>
-                            <span class="event-tag">舆论</span>
-                            • 相关视频在社交媒体广泛传播<br>
-                            • 网友对美军伤亡表示关注<br>
-                            • 对战争前景表达担忧
                         </div>
                     </div>
                 </div>
@@ -637,7 +579,7 @@
             
             <div class="hourly-timeline">
                 <div class="event-item critical">
-                    <div class="event-time">08:00</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content critical">
                         <div class="event-title">伊朗威胁更猛烈报复</div>
                         <div class="event-details">
@@ -652,7 +594,7 @@
                 </div>
                 
                 <div class="event-item critical">
-                    <div class="event-time">11:30</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content critical">
                         <div class="event-title">特朗普要求伊朗"无条件投降"</div>
                         <div class="event-details">
@@ -666,7 +608,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">14:15</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content">
                         <div class="event-title">美军制定作战目标</div>
                         <div class="event-details">
@@ -675,20 +617,6 @@
                             • 美国防部长赫格塞思宣布<br>
                             • 美以目标：一周内"完全控制"伊朗领空<br>
                             • 持续削弱伊朗军事能力
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">20:00</div>
-                    <div class="event-content">
-                        <div class="event-title">战损数据公布</div>
-                        <div class="event-details">
-                            <span class="event-tag">战损统计</span>
-                            <span class="event-tag">数据公布</span>
-                            • 双方公布初步战损数据<br>
-                            • 伊朗称摧毁近10部美军先进雷达<br>
-                            • 美以联军表示将继续打击行动
                         </div>
                     </div>
                 </div>
@@ -713,28 +641,14 @@
                             • 以军袭击德黑兰省Garmdareh化工厂<br>
                             • 该厂生产导弹组件<br>
                             • 位于Alborz省，德黑兰以西<br>
-                            • 伊朗媒体报告听到爆炸声
+                            • 伊朗媒体报告听到爆炸声<br>
+                            • 卫星图像显示至少8栋建筑被毁
                         </div>
                     </div>
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">09:45</div>
-                    <div class="event-content">
-                        <div class="event-title">卫星图像确认打击效果</div>
-                        <div class="event-details">
-                            <span class="event-tag">卫星图像</span>
-                            <span class="event-tag">损失评估</span>
-                            • James Martin研究中心发布卫星图像<br>
-                            • 显示至少8栋建筑被毁或严重受损<br>
-                            • 设施生产固体燃料地对地导弹原材料<br>
-                            • 打击严重影响伊朗导弹生产能力
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-time">15:00</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content">
                         <div class="event-title">美军中央司令部发布战报</div>
                         <div class="event-details">
@@ -773,7 +687,7 @@
                 </div>
                 
                 <div class="event-item critical">
-                    <div class="event-time">05:30</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content critical">
                         <div class="event-title">伊朗高层身亡</div>
                         <div class="event-details">
@@ -787,7 +701,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">12:00</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content">
                         <div class="event-title">国际社会反应</div>
                         <div class="event-details">
@@ -801,7 +715,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">15:30</div>
+                    <div class="event-time unconfirmed">⏰ 时间未确认</div>
                     <div class="event-content">
                         <div class="event-title">全球市场反应</div>
                         <div class="event-details">
@@ -825,7 +739,7 @@
             
             <div class="hourly-timeline">
                 <div class="event-item">
-                    <div class="event-time">2026-03-01 00:30</div>
+                    <div class="event-time">2026-03-01 凌晨</div>
                     <div class="event-content">
                         <div class="event-title">哈梅内伊身亡</div>
                         <div class="event-details">
@@ -839,7 +753,7 @@
                 </div>
                 
                 <div class="event-item">
-                    <div class="event-time">2026-02-21 全天</div>
+                    <div class="event-time">2026-02-21</div>
                     <div class="event-content">
                         <div class="event-title">第二波大规模抗议爆发</div>
                         <div class="event-details">
@@ -865,7 +779,7 @@
                 </div>
                 
                 <div class="event-item critical">
-                    <div class="event-time">2025-06-13 ~ 06-24</div>
+                    <div class="event-time">2025-06-13 至 06-24</div>
                     <div class="event-content critical">
                         <div class="event-title">十二日战争</div>
                         <div class="event-details">
@@ -894,7 +808,12 @@
         
         <div class="last-updated">
             <p>最后更新: <span id="last-update-time">加载中...</span> <span class="refresh-badge">自动刷新中</span></p>
-            <p style="margin-top: 10px; font-size: 0.9em;">页面每30分钟自动刷新一次 | 精确到分钟追踪 | 本页面数据公开来源，仅供参考</p>
+            <p style="margin-top: 10px; font-size: 0.9em; color: #ffc107;">
+                ⚠️ 时间标注说明：<br>
+                • 精确时间（如 02:00）：有明确来源确认<br>
+                • "时间未确认"：事件发生但具体时间尚未从公开来源确认<br>
+                • 本页面数据来自公开来源，仅供参考
+            </p>
         </div>
     </div>
     
