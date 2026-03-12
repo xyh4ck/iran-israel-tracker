@@ -1,0 +1,137 @@
+{
+  "metadata": {
+    "last_updated": "2026-03-12T19:22:00+08:00",
+    "total_events": 18,
+    "conflict_start": "2026-02-28"
+  },
+  "stats": {
+    "duration_days": 13,
+    "missiles_launched": "500+",
+    "drone_attacks": "2000+",
+    "civilian_deaths": "1800+"
+  },
+  "events": [
+    {
+      "id": "2026-03-12-beirut-bombardment",
+      "date": "2026-03-12",
+      "time": "3月11日深夜 - 3月12日凌晨",
+      "title": "贝鲁特遭冲突以来最猛烈轰炸",
+      "details": "真主党于3月11日晚向以色列北部发动大规模火箭弹袭击。以色列报复性轰炸持续整夜，贝鲁特天空被爆炸映红。Ramlet al-Baida区一次袭击造成至少7人死亡，21人受伤。Aisha Bakkar区公寓楼遭直接击中。",
+      "tags": ["局势升级", "平民伤亡", "黎巴嫩"],
+      "critical": true,
+      "sources": [
+        {
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/world/2026/mar/12/israel-bombards-beirut-southern-lebanon-hezbollah"
+        },
+        {
+          "name": "New York Times",
+          "url": "https://www.nytimes.com/2026/03/11/world/middleeast/beirut-lebanon-israel-strikes.html"
+        },
+        {
+          "name": "Reuters",
+          "url": "https://www.reuters.com/world/middle-east/israeli-strike-hits-beirut-apartment-block-lebanese-media-reports-2026-03-11/"
+        }
+      ]
+    },
+    {
+      "id": "2026-03-12-thai-ship",
+      "date": "2026-03-12",
+      "time": "3月12日清晨",
+      "title": "泰国货轮在霍尔木兹海峡遇袭起火",
+      "details": "泰国货轮Mayuree Naree号在霍尔木兹海峡遭无人机袭击，船只机舱起火，浓烟滚滚。3名泰国船员被困机舱。马耳他籍油轮Zefyros也遭袭击。霍尔木兹海峡航运量下降80%，接近完全瘫痪。",
+      "tags": ["海上袭击", "航运安全", "霍尔木兹海峡"],
+      "critical": true,
+      "sources": [
+        {
+          "name": "CBS News",
+          "url": "https://www.cbsnews.com/live-updates/iran-war-us-israel-strait-of-hormuz-ship-attacks-persian-gulf-drones-missiles/"
+        },
+        {
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/world/live/2026/mar/11/iran-war-live-updates-trump-oil-hormuz-protestors-us-israel-beirut-middle-east-latest-news"
+        }
+      ]
+    },
+    {
+      "id": "2026-03-12-casualties",
+      "date": "2026-03-12",
+      "time": "3月12日",
+      "title": "伤亡数据更新：近1800人死亡",
+      "details": "伊朗：1,200+平民死亡（伊朗红新月会数据）。黎巴嫩：570人死亡，近76万人流离失所。以色列：13人死亡。阿联酋：6人死亡。美军：7人死亡，8人重伤。总计约1,800人死亡，平民占绝大多数。",
+      "tags": ["伤亡统计", "人道危机"],
+      "critical": true,
+      "sources": [
+        {
+          "name": "NBC News",
+          "url": "https://www.nbcnews.com/world/iran/live-blog/live-updates-iran-war-israel-us-lebanon-tehran-oil-prices-hormuz-rcna262889"
+        },
+        {
+          "name": "New York Times",
+          "url": "https://www.nytimes.com/live/2026/03/11/world/iran-war-news-trump-oil-israel"
+        }
+      ]
+    },
+    {
+      "id": "2026-03-12-oil-reserves",
+      "date": "2026-03-12",
+      "time": "3月12日中午",
+      "title": "32国同意释放4亿桶石油储备",
+      "details": "32个国家同意释放石油储备。国际能源署(IEA)协调释放创纪录的4亿桶石油。应对霍尔木兹海峡袭击导致的油价飙升。布伦特原油重回100美元/桶。旨在稳定全球能源市场。",
+      "tags": ["国际响应", "能源安全", "石油"],
+      "critical": false,
+      "sources": [
+        {
+          "name": "Reuters",
+          "url": "https://www.reuters.com/business/energy/oil-climbs-tankers-are-attacked-iraqi-waters-amid-middle-east-war-2026-03-12/"
+        },
+        {
+          "name": "AP News",
+          "url": "https://apnews.com/article/iran-israel-us-march-12-2026-oil-prices-90e17dbf7354d1e9428994ab2a036506"
+        }
+      ]
+    },
+    {
+      "id": "2026-03-12-cluster-munitions",
+      "date": "2026-03-12",
+      "time": "3月12日",
+      "title": "伊朗持续使用集束弹药弹头导弹",
+      "details": "伊朗使用弹道导弹发射集束弹药弹头袭击以色列。3月1日Beit Shemesh袭击造成至少9人死亡，27人受伤。3月8-9日集束弹药袭击再致2名以色列平民死亡。以色列国防军确认拦截多枚集束弹头导弹。国际法专家：可能违反国际法，构成战争罪。",
+      "tags": ["武器升级", "战争法争议", "集束弹药"],
+      "critical": true,
+      "sources": [
+        {
+          "name": "New York Times",
+          "url": "https://www.nytimes.com/2026/03/11/world/middleeast/iran-israel-cluster-munitions.html"
+        },
+        {
+          "name": "BBC",
+          "url": "https://www.bbc.com/news/articles/c4g0pnnj8xyo"
+        },
+        {
+          "name": "FDD",
+          "url": "https://www.fdd.org/analysis/2026/03/11/iran-increasingly-employing-cluster-munitions-against-israeli-civilians/"
+        }
+      ]
+    },
+    {
+      "id": "2026-03-12-trump-statement",
+      "date": "2026-03-12",
+      "time": "3月12日",
+      "title": "特朗普誓言"很快结束战争"",
+      "details": "特朗普在肯塔基州集会上表示战争"已经赢了"。国务院已协助43,000名美国公民撤离中东。但前线战斗仍在持续升级。",
+      "tags": ["政治表态", "美国"],
+      "critical": false,
+      "sources": [
+        {
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/world/live/2026/mar/11/iran-war-live-updates-trump-oil-hormuz-protestors-us-israel-beirut-middle-east-latest-news"
+        },
+        {
+          "name": "Fox News",
+          "url": "https://www.foxnews.com/live-news/us-iran-israel-war-latest-march-10-live-updates"
+        }
+      ]
+    }
+  ]
+}
