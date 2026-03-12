@@ -497,7 +497,7 @@
         function updateStats() {
             const stats = conflictData.stats;
             document.getElementById('stat-duration').textContent = stats.duration_days + '天';
-            document.getElementById('stat-duration-sub').textContent = conflictData.metadata.confflict_start + ' 至今';
+            document.getElementById('stat-duration-sub').textContent = conflictData.metadata.conflict_start + ' 至今';
             document.getElementById('stat-missiles').textContent = stats.missiles_launched;
             document.getElementById('stat-drones').textContent = stats.drone_attacks;
             document.getElementById('stat-deaths').textContent = stats.civilian_deaths;
