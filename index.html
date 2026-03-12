@@ -972,12 +972,13 @@
         </div>
         
         <div class="last-updated">
-            <p>最后更新: <span id="last-update-time">2026-03-11 11:44:54</span> <span class="refresh-badge">自动更新中</span></p>
+            <p>最后更新: <span id="last-update-time"></span> <span class="refresh-badge">自动更新中</span></p>
             <p style="margin-top: 15px; font-size: 0.9em; color: #4ecca3;">
                 ✅ 按日期分组的事件脉络<br>
                 • 点击顶部按钮筛选日期，或"查看全部"看完整时间线<br>
                 • 点击"📰 链接"查看原始新闻报道<br>
-                • 所有事件均标注来源，支持跳转查看详情
+                • 所有事件均标注来源，支持跳转查看详情<br>
+                • 页面每5分钟自动刷新以获取最新内容
             </p>
         </div>
     </div>
@@ -1072,13 +1073,14 @@
         // 页面加载时更新
         updateTime();
         
-        // 每分钟更新一次时间
+        // 每分钟更新一次时间显示
         setInterval(updateTime, 60000);
         
-        // 30分钟后自动刷新页面
+        // 每5分钟自动刷新页面以获取最新内容
+        // 注意: GitHub Pages 部署需要几分钟,刷新后可能还是旧内容
         setTimeout(() => {
             location.reload();
-        }, 30 * 60 * 1000);
+        }, 5 * 60 * 1000); // 5分钟后刷新
     </script>
 </body>
 </html>
