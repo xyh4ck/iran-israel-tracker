@@ -455,9 +455,11 @@
         // Load data from JSON
         async function loadData() {
             try {
+                console.log('开始加载数据...');
                 const response = await fetch('data/events.json?' + new Date().getTime());
                 if (!response.ok) throw new Error('Failed to load data');
                 conflictData = await response.json();
+                console.log('数据加载成功:', conflictData);
                 renderPage();
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -506,13 +508,17 @@
         
         // Generate filter buttons
         function generateFilterButtons() {
+            console.log('generateFilterButtons 被调用');
             const container = document.getElementById('filter-buttons');
+            console.log('Container:', container);
             
             // Get unique dates
             const dates = [...new Set(conflictData.events.map(e => e.date))].sort().reverse();
+            console.log('Dates:', dates);
             
             // Clear existing buttons (except "all")
             const allBtn = container.querySelector('.filter-btn.all');
+            console.log('All button:', allBtn);
             container.innerHTML = '';
             container.appendChild(allBtn);
             
@@ -522,12 +528,20 @@
                 btn.className = 'filter-btn';
                 btn.setAttribute('data-date', date);
                 btn.textContent = date;
-                btn.addEventListener('click', () => filterByDate(date));
+                btn.addEventListener('click', () => {
+                    console.log('按钮被点击:', date);
+                    filterByDate(date);
+                });
                 container.appendChild(btn);
             });
             
             // Bind "all" button
-            allBtn.addEventListener('click', () => filterByDate('all'));
+            allBtn.addEventListener('click', () => {
+                console.log('查看全部被点击');
+                filterByDate('all');
+            });
+            
+            console.log('按钮总数:', container.children.length);
             
             // Auto-select current date
             autoSelectCurrentDate(dates);
