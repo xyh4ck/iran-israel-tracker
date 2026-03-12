@@ -363,7 +363,7 @@
         <div class="filter-bar">
             <div class="filter-label">📅 选择查看日期</div>
             <div class="filter-buttons">
-                <button class="filter-btn all active" data-date="all">查看全部</button>
+                <button class="filter-btn all" data-date="all">查看全部</button>
                 <button class="filter-btn" data-date="2026-03-12">2026-03-12</button>
                 <button class="filter-btn" data-date="2026-03-11">2026-03-11</button>
                 <button class="filter-btn" data-date="2026-03-10">2026-03-10</button>
@@ -399,7 +399,7 @@
         </div>
         
         <!-- 2026-03-12 -->
-        <div class="date-group active" id="date-2026-03-12">
+        <div class="date-group" id="date-2026-03-12">
             <div class="date-header">
                 <div class="date-title">📅 2026年3月12日</div>
                 <div class="date-summary">冲突第13天 - 贝鲁特遭最猛烈轰炸，霍尔木兹海峡航运瘫痪</div>
@@ -987,24 +987,70 @@
         const filterBtns = document.querySelectorAll('.filter-btn');
         const dateGroups = document.querySelectorAll('.date-group');
         
+        // 自动激活当前日期
+        function autoActivateCurrentDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const todayDate = `${year}-${month}-${day}`;
+            
+            // 检查是否存在今天日期的内容
+            const todayGroup = document.getElementById('date-' + todayDate);
+            
+            if (todayGroup) {
+                // 如果有今天的内容,激活今天
+                activateDate(todayDate);
+            } else {
+                // 如果没有今天的内容,查找最近的日期
+                const availableDates = Array.from(dateGroups)
+                    .map(g => g.id.replace('date-', ''))
+                    .filter(d => d !== 'history')
+                    .sort()
+                    .reverse();
+                
+                if (availableDates.length > 0) {
+                    activateDate(availableDates[0]);
+                } else {
+                    // 如果没有任何日期内容,显示全部
+                    activateDate('all');
+                }
+            }
+        }
+        
+        // 激活指定日期
+        function activateDate(date) {
+            // 移除所有激活状态
+            filterBtns.forEach(b => b.classList.remove('active'));
+            dateGroups.forEach(g => g.classList.remove('active'));
+            
+            // 激活对应按钮
+            const targetBtn = document.querySelector(`.filter-btn[data-date="${date}"]`);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+            }
+            
+            // 显示对应日期组
+            if (date === 'all') {
+                dateGroups.forEach(g => g.classList.add('active'));
+            } else {
+                const targetGroup = document.getElementById('date-' + date);
+                if (targetGroup) {
+                    targetGroup.classList.add('active');
+                }
+            }
+        }
+        
+        // 绑定筛选按钮点击事件
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // 移除所有激活状态
-                filterBtns.forEach(b => b.classList.remove('active'));
-                dateGroups.forEach(g => g.classList.remove('active'));
-                
-                // 激活当前按钮
-                btn.classList.add('active');
-                
-                // 显示对应日期组
                 const date = btn.getAttribute('data-date');
-                if (date === 'all') {
-                    dateGroups.forEach(g => g.classList.add('active'));
-                } else {
-                    document.getElementById('date-' + date).classList.add('active');
-                }
+                activateDate(date);
             });
         });
+        
+        // 页面加载时自动激活日期
+        autoActivateCurrentDate();
         
         // 更新时间显示
         function updateTime() {
